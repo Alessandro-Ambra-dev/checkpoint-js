@@ -1,6 +1,6 @@
 let divINfo = document.getElementById("pokeInfo");
 let input = document.getElementById("pokename");
-
+let title = document.getElementById("pokeId");
 let btn = document.getElementById("search");
 let p1 = document.getElementById("exp");
 let moves = document.getElementById("moves");
@@ -15,9 +15,10 @@ function getInfo() {
     .then((res) => res.json())
     .then((json) => json)
     .then((res) => {
-      console.log(res.name);
+      title.innerText = res.name;
+      moves.innerText = "Moves:";
       res.abilities.forEach(
-        (el) => (moves.innerText = `Moves: ${el.ability.name}`)
+        (el) => (moves.innerHTML += `<li>${el.ability.name}</li>`)
       );
       exp.innerText = `Experience: ${res.base_experience}`;
       image.src = res.sprites.front_default;
